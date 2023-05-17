@@ -23,22 +23,22 @@ namespace Memory
                                // d'images dans le réservoir)
         int nbCartesSurTapis; // Nombre de cartes sur le tapis
 
-        int nbCarteRetourne = 0;
+        int nbCarteRetourne = 0; //MAX 1
 
         System.Timers.Timer timerRetry;
 
-        Mutex mutex;
 
         int[] tImagesCartes;
-        bool attente = false;
-        int i_carte2;
-        int i_carte1;
-        int carteClique;
-        bool tromper = false;
-        bool[] ImageTrouvee = { false, false,false,false,false,false,false,false};
-        int indicePremierCarteCLique =0;
-        int imageTrouveCompteur =0;
-        int[] tImagesCartes1Dim = new int[8];
+
+        bool attente = false; //SERT A BLOQUER LE CLICK SUR LES AUTRE IMAGE TANT QUE LES DEUX CARTE DIFFERENTES SONT FACE RECTO
+        int i_carte2; //2 eme carte tiré
+        int i_carte1; //1 er carte tiré
+        int carteClique; //Carte courante cliqué
+
+        bool[] ImageTrouvee = { false, false,false,false,false,false,false,false}; //TABLEAU DE BOOLEAN DES CARTE TROUVER
+        int indicePremierCarteCLique = 0; // Indice de la premier Carte CLiqué (INDICE DE L IMAGE 1-256)
+        int imageTrouveCompteur =0; //Nombre d'image trouvés (Augmente de 2 par 2)
+        int[] tImagesCartes1Dim = new int[8]; //Tableau pour générer l'aléatoire
 
         LotoMachine hasard;
 
@@ -50,7 +50,7 @@ namespace Memory
              
         }
 
-        private void Distribution_Sequentielle()
+        private void Distribution_Sequentielle() //PAS UTILISER DANS LA NOUVELLE VERSION (MAIS IMPLEMENTER COMME DEMANDER)
         {
             PictureBox carte;
             int i_carte = 1;
@@ -66,17 +66,16 @@ namespace Memory
             }
         }
 
-        private void btn_Distribuer_Click(object sender, EventArgs e)
+        private void btn_Distribuer_Click(object sender, EventArgs e) //Quand click sur distribuer (afficher 8 cartes a l'utilisateur)
         {
             nbCartesDansSabot = ilSabotDeCartes.Images.Count - 1;
             nbCartesSurTapis = tlpTapisDeCartes.Controls.Count;
             Distribution_Aleatoire();
         }
 
-        private void Distribution_Aleatoire()
+        private void Distribution_Aleatoire() //GENERE 4 NOMBRE ALEAOITRE QUI SERONT LES INDICE DES IMAGE POUR LES CARTE
         {
             // On utilise la LotoMachine pour générer une série aléatoire
-
             
             hasard = new LotoMachine(nbCartesDansSabot);
             // On veut une série de nbCartesSurTapis cartes parmi celles
@@ -88,8 +87,9 @@ namespace Memory
             PictureBox carte;
             int i_image;
 
-            int[,] tTabTemp = new int[2, 4] { { 0, 0, 0, 0 }, { 0, 0, 0, 0 } };
+            int[,] tTabTemp = new int[2, 4] { { 0, 0, 0, 0 }, { 0, 0, 0, 0 } }; /// ON DISTRIBUE 2 FOIS LE MEME NUMERO ALEATOIREMENT
 
+            
             for (int i = 0; i <= 1; i++)
             {
                 for (int j = 0; j < tImagesCartes.Length; j++)
@@ -107,12 +107,10 @@ namespace Memory
                     }
                 }
             }
-
-
-
             int ligne = 0;
             int colonne = 0;
-            
+
+            //Fonction répartition de 4 carte * 2 parmi 8
             for (int i_carte = 0; i_carte < nbCartesSurTapis; i_carte++)
             { 
                 if(i_carte == 4)
@@ -153,19 +151,19 @@ namespace Memory
         }
 
 
-        private void pb_XX_Click(object sender, EventArgs e)
+        private void pb_XX_Click(object sender, EventArgs e) //FONCTION Appeléé quand click sur une pictureBox
         {
 
             PictureBox carte;
             int i_image;
-        if(!attente)
+        if(!attente) //ATTENDRE  LES CARTE ACTUELLEMENT RETOURNER FACE VERSO
         {
-                if (nbCarteRetourne < 2)
+                if (nbCarteRetourne < 2) //SECURITE (on peut ps avoir 2 carte retourner ---- 1 ere carte : 0 ----- 2 ème carte : 1 
                 {
-                    carte = (PictureBox)sender;
-                    carteClique = Convert.ToInt32(carte.Tag);
+                    carte = (PictureBox)sender; 
+                    carteClique = Convert.ToInt32(carte.Tag); //recuperation de la carte courante
 
-                    if (nbCarteRetourne == 0)
+                    if (nbCarteRetourne == 0) //Si c'est la 1ere carte
                     {
                         i_carte1 = carteClique;
                         indicePremierCarteCLique = tImagesCartes1Dim[i_carte1];
@@ -175,17 +173,17 @@ namespace Memory
 
                     }
 
-                    else
+                    else //Si c'est la deuxieme carte
                     {
                         i_carte2 = carteClique;
                         i_image = tImagesCartes1Dim[i_carte2];
                         carte.Image = ilSabotDeCartes.Images[i_image];
 
-                        if (i_image == indicePremierCarteCLique)
+                        if (i_image == indicePremierCarteCLique) //compraison des images
                         {
-                            ImageTrouvee[i_carte1] = true;
+                            ImageTrouvee[i_carte1] = true; //MAJ du tableau de boolean
                             ImageTrouvee[i_carte2] = true;
-                            imageTrouveCompteur += 2;
+                            imageTrouveCompteur += 2; //Augmentation de 2 car pair 
                         }
 
                         if (imageTrouveCompteur == 8)
@@ -196,24 +194,25 @@ namespace Memory
 
                         }
 
-                        timerRetry = new System.Timers.Timer(2500);
-                        timerRetry.Elapsed += TimerElapsed;
-                        attente = true;
+                        timerRetry = new System.Timers.Timer(2500); //Creation d'un timer pour afficher les carte cliqué
+                        timerRetry.Elapsed += TimerElapsed; 
+                        attente = true; //verrou
 
-                        timerRetry.Start();
+                        timerRetry.Start(); //lancement du timer
                     }
                 }
             }
         }
 
-        /*private void btn_Retourner_Click(object sender, EventArgs e)
+
+        private void btn_Retourner_Click(object sender, EventArgs e) //FONCTION NON UTILISE DANS CETTE VERSION
         {
             retournerCarte();
-        }*/
+        }
 
-        private void jouer_Click(object sender, EventArgs e)
+        private void jouer_Click(object sender, EventArgs e) 
         {
-            
+            //RENITIALISATION DES VARIABLE GLOBALE
             for (int i = 0; i < ImageTrouvee.Length; i++)
             {
                 ImageTrouvee[i] = false;
@@ -221,6 +220,8 @@ namespace Memory
             }
             nbCartesDansSabot = ilSabotDeCartes.Images.Count - 1;
             nbCartesSurTapis = tlpTapisDeCartes.Controls.Count;
+
+            //INITIALISATION DES SERVICES
             retournerCarte();
             timer.Start();
             stopwatch.Start();
@@ -244,7 +245,7 @@ namespace Memory
         }
 
 
-        private void timer_Tick(object sender, EventArgs e)
+        private void timer_Tick(object sender, EventArgs e) //TIMER VISUEL POUR DETERMINER LA LONGUEUR DE LA PARTIE EN SECONDE
         {
             chronoLabel.Text = stopwatch.Elapsed.Seconds.ToString();
             Application.DoEvents();
