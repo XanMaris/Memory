@@ -33,9 +33,7 @@ namespace Memory
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(memory));
             this.titre = new System.Windows.Forms.Label();
             this.btn_Distribuer = new System.Windows.Forms.Button();
-            this.btn_Retourner = new System.Windows.Forms.Button();
             this.jouer = new System.Windows.Forms.Button();
-            this.pb_Recherche = new System.Windows.Forms.PictureBox();
             this.tlpTapisDeCartes = new System.Windows.Forms.TableLayoutPanel();
             this.pb_08 = new System.Windows.Forms.PictureBox();
             this.pb_07 = new System.Windows.Forms.PictureBox();
@@ -49,7 +47,6 @@ namespace Memory
             this.btn_Test = new System.Windows.Forms.Button();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.timerLabel = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pb_Recherche)).BeginInit();
             this.tlpTapisDeCartes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pb_08)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_07)).BeginInit();
@@ -80,16 +77,6 @@ namespace Memory
             this.btn_Distribuer.UseVisualStyleBackColor = true;
             this.btn_Distribuer.Click += new System.EventHandler(this.btn_Distribuer_Click);
             // 
-            // btn_Retourner
-            // 
-            this.btn_Retourner.Location = new System.Drawing.Point(239, 447);
-            this.btn_Retourner.Name = "btn_Retourner";
-            this.btn_Retourner.Size = new System.Drawing.Size(129, 59);
-            this.btn_Retourner.TabIndex = 2;
-            this.btn_Retourner.Text = "Retourner les cartes";
-            this.btn_Retourner.UseVisualStyleBackColor = true;
-            this.btn_Retourner.Click += new System.EventHandler(this.btn_Retourner_Click);
-            // 
             // jouer
             // 
             this.jouer.Location = new System.Drawing.Point(421, 450);
@@ -99,14 +86,6 @@ namespace Memory
             this.jouer.Text = "Jouer";
             this.jouer.UseVisualStyleBackColor = true;
             this.jouer.Click += new System.EventHandler(this.jouer_Click);
-            // 
-            // pb_Recherche
-            // 
-            this.pb_Recherche.Location = new System.Drawing.Point(613, 454);
-            this.pb_Recherche.Name = "pb_Recherche";
-            this.pb_Recherche.Size = new System.Drawing.Size(129, 109);
-            this.pb_Recherche.TabIndex = 12;
-            this.pb_Recherche.TabStop = false;
             // 
             // tlpTapisDeCartes
             // 
@@ -453,14 +432,11 @@ namespace Memory
             this.Controls.Add(this.timerLabel);
             this.Controls.Add(this.btn_Test);
             this.Controls.Add(this.tlpTapisDeCartes);
-            this.Controls.Add(this.pb_Recherche);
             this.Controls.Add(this.jouer);
-            this.Controls.Add(this.btn_Retourner);
             this.Controls.Add(this.btn_Distribuer);
             this.Controls.Add(this.titre);
             this.Name = "memory";
             this.Text = "Memory";
-            ((System.ComponentModel.ISupportInitialize)(this.pb_Recherche)).EndInit();
             this.tlpTapisDeCartes.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pb_08)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_07)).EndInit();
@@ -479,9 +455,7 @@ namespace Memory
 
         private System.Windows.Forms.Label titre;
         private System.Windows.Forms.Button btn_Distribuer;
-        private System.Windows.Forms.Button btn_Retourner;
         private System.Windows.Forms.Button jouer;
-        private System.Windows.Forms.PictureBox pb_Recherche;
         private System.Windows.Forms.TableLayoutPanel tlpTapisDeCartes;
         private System.Windows.Forms.PictureBox pb_04;
         private System.Windows.Forms.PictureBox pb_01;

@@ -14,7 +14,7 @@ using System.Diagnostics;
 
 namespace Memory
 {
-   
+
     public partial class memory : Form
     {
         Stopwatch watch = new Stopwatch();
@@ -25,8 +25,16 @@ namespace Memory
 
         int nbCarteRetourne = 0;
 
-        int[] tImagesCartes ;
-        int i_hasard;
+        int[] tImagesCartes;
+
+        int i_carte2;
+        int i_carte1;
+        int carteClique;
+
+        bool[] ImageTrouvee = { false, false,false,false,false,false,false,false};
+        int indicePremierCarteCLique =0;
+
+        int[] tImagesCartes1Dim = new int[8];
 
         LotoMachine hasard;
 
@@ -62,23 +70,58 @@ namespace Memory
         private void Distribution_Aleatoire()
         {
             // On utilise la LotoMachine pour générer une série aléatoire
+
+            
             hasard = new LotoMachine(nbCartesDansSabot);
             // On veut une série de nbCartesSurTapis cartes parmi celles
             // du réservoir
-            tImagesCartes = hasard.TirageAleatoire(nbCartesSurTapis, false);
+            tImagesCartes = hasard.TirageAleatoire(nbCartesSurTapis / 2 , false);
             // La série d'entiers retournée par la LotoMachine correspondra
             // aux indices des cartes dans le "sabot"
             // Affectation des images aux picturebox
             PictureBox carte;
             int i_image;
-            for (int i_carte = 0; i_carte < nbCartesSurTapis; i_carte++)
-            {
 
+            int[,] tTabTemp = new int[2, 4] { { 0, 0, 0, 0 }, { 0, 0, 0, 0 } };
+
+            for (int i = 0; i <= 1; i++)
+            {
+                for (int j = 0; j < tImagesCartes.Length; j++)
+                {
+                    while (true)
+                    {
+                        Random rnd = new Random();
+                        int k = rnd.Next(0, 4);
+                        int l = rnd.Next(0, 2);
+                        if (tTabTemp[l, k] == 0)
+                        {
+                            tTabTemp[l, k] = tImagesCartes[j];
+                            break;
+                        }
+                    }
+                }
+            }
+
+
+
+            int ligne = 0;
+            int colonne = 0;
+            
+            for (int i_carte = 0; i_carte < nbCartesSurTapis; i_carte++)
+            { 
+                if(i_carte == 4)
+                {
+                    ligne = 1;
+                    colonne = 0;
+                }
+                
                 carte = (PictureBox)tlpTapisDeCartes.Controls[i_carte];
-                i_image = tImagesCartes[i_carte + 1]; // i_carte + 1 à cause
-                                                      // des pbs d'indices
+                i_image = tTabTemp[ligne, colonne];
+                tImagesCartes1Dim[i_carte] = i_image;
                 carte.Tag = i_carte;
                 carte.Image = ilSabotDeCartes.Images[i_image];
+                colonne++;
+
             }
         }
 
@@ -106,27 +149,35 @@ namespace Memory
         {
 
             PictureBox carte;
-            int i_carte, i_image;
+           
+            int i_image;
             Image Image_1, Image_2;
-            //if (Image_1 == null)
-            // MessageBox.Show("L'image 1 n'est pas référencée");
-            //if (Image_2 == null)
-            // MessageBox.Show("L'image 2 n'est pas référencée");
             if (nbCarteRetourne < 2)
             {
                 carte = (PictureBox)sender;
-                i_carte = Convert.ToInt32(carte.Tag);
-                i_image = tImagesCartes[i_carte+1];
-                carte.Image = ilSabotDeCartes.Images[i_image];
-               if (i_image == i_hasard)
+                carteClique = Convert.ToInt32(carte.Tag);
+
+                if (indicePremierCarteCLique == 0 )
                 {
-                    MessageBox.Show("Bravo !");
+                    i_carte1 = carteClique;
+                    indicePremierCarteCLique = tImagesCartes1Dim[i_carte1];
+                    i_image = tImagesCartes1Dim[i_carte1];
+                    carte.Image = ilSabotDeCartes.Images[i_image];
                 }
+                
                 else
-            {
-                    MessageBox.Show("DOMMAGE !");
+                {
+                    i_carte2 = carteClique;
+                    i_image = tImagesCartes1Dim[i_carte2];
+                    carte.Image = ilSabotDeCartes.Images[i_image];
+                    if (i_image == indicePremierCarteCLique)
+                    {
+                        ImageTrouvee[i_carte1] = true;
+                        ImageTrouvee[i_carte2] = true;
+                    }
                 }
-                if (nbCarteRetourne == 0)
+                
+             /*   if (nbCarteRetourne == 0)
                 {
                     Image_1 = carte.Image;
                 }
@@ -134,34 +185,44 @@ namespace Memory
                 {
                     Image_2 = carte.Image;
                 }
+             */
                 nbCarteRetourne++;
             }
-            else
-            {
-                MessageBox.Show("Deux cartes sont déjà retournées !");
-               // RetournerLesCartes();
+                
+             else
+                {
+                // MessageBox.Show("Deux cartes sont déjà retournées !");
+                retournerCarte();
                 nbCarteRetourne = 0;
+                indicePremierCarteCLique = 0;
+                pb_XX_Click(sender,e);
                 Image_1 = null;
                 Image_2 = null;
-            }
+                }
         }
 
-        private void btn_Retourner_Click(object sender, EventArgs e)
+        /*private void btn_Retourner_Click(object sender, EventArgs e)
         {
             retournerCarte();
-        }
+        }*/
 
         private void jouer_Click(object sender, EventArgs e)
         {
-
+            for (int i = 0; i < ImageTrouvee.Length; i++)
+            {
+                ImageTrouvee[i] = false;
+            }
             nbCartesDansSabot = ilSabotDeCartes.Images.Count - 1;
             nbCartesSurTapis = tlpTapisDeCartes.Controls.Count;
             retournerCarte();
           
-            i_hasard = hasard.NumeroAleatoire();
+          /*  i_hasard = hasard.NumeroAleatoire();
             PictureBox carte;
             carte = pb_Recherche;
+
+
             carte.Image = ilSabotDeCartes.Images[i_hasard];
+          */
 
             //section timer
 
@@ -171,13 +232,16 @@ namespace Memory
         }
 
         private void retournerCarte()
-
         {
             PictureBox carte;
             for (int i_carte = 0; i_carte < nbCartesSurTapis; i_carte++)
-            {
-                carte = (PictureBox)tlpTapisDeCartes.Controls[i_carte];
-                carte.Image = ilSabotDeCartes.Images[0];
+            {  
+                if(!ImageTrouvee[i_carte])
+                {
+                    carte = (PictureBox)tlpTapisDeCartes.Controls[i_carte];
+                    carte.Image = ilSabotDeCartes.Images[0];
+                }
+                
             }
         }
 
