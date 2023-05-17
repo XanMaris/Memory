@@ -11,16 +11,13 @@ using dllLoto;
 using System.Timers;
 using Nest;
 using System.Diagnostics;
+using System.Threading;
 
 namespace Memory
 {
 
     public partial class memory : Form
     {
-        
-        
-
-
         // Déclaration des variables globales du jeu
         int nbCartesDansSabot; // Nombre de cartes dans le sabot (en fait nombre
                                // d'images dans le réservoir)
@@ -28,8 +25,12 @@ namespace Memory
 
         int nbCarteRetourne = 0;
 
-        int[] tImagesCartes;
+        System.Timers.Timer timerRetry;
 
+        Mutex mutex;
+
+        int[] tImagesCartes;
+        bool attente = false;
         int i_carte2;
         int i_carte1;
         int carteClique;
@@ -46,6 +47,7 @@ namespace Memory
         public memory()
         {
             InitializeComponent();
+             
         }
 
         private void Distribution_Sequentielle()
@@ -153,68 +155,54 @@ namespace Memory
 
         private void pb_XX_Click(object sender, EventArgs e)
         {
-           
-            PictureBox carte;
-           
-            int i_image;
-            Image Image_1, Image_2;
-            if (nbCarteRetourne < 2)
-            {
-                carte = (PictureBox)sender;
-                carteClique = Convert.ToInt32(carte.Tag);
 
-                if (indicePremierCarteCLique == 0 )
+            PictureBox carte;
+            int i_image;
+        if(!attente)
+        {
+                if (nbCarteRetourne < 2)
                 {
-                    i_carte1 = carteClique;
-                    indicePremierCarteCLique = tImagesCartes1Dim[i_carte1];
-                    i_image = tImagesCartes1Dim[i_carte1];
-                    carte.Image = ilSabotDeCartes.Images[i_image];
-                }
-                
-                else
-                {
-                    i_carte2 = carteClique;
-                    i_image = tImagesCartes1Dim[i_carte2];
-                    carte.Image = ilSabotDeCartes.Images[i_image];
-                    if (i_image == indicePremierCarteCLique)
+                    carte = (PictureBox)sender;
+                    carteClique = Convert.ToInt32(carte.Tag);
+
+                    if (nbCarteRetourne == 0)
                     {
-                        ImageTrouvee[i_carte1] = true;
-                        ImageTrouvee[i_carte2] = true;
-                        imageTrouveCompteur+=2;
+                        i_carte1 = carteClique;
+                        indicePremierCarteCLique = tImagesCartes1Dim[i_carte1];
+                        i_image = tImagesCartes1Dim[i_carte1];
+                        carte.Image = ilSabotDeCartes.Images[i_image];
+                        nbCarteRetourne++;
+
+                    }
+
+                    else
+                    {
+                        i_carte2 = carteClique;
+                        i_image = tImagesCartes1Dim[i_carte2];
+                        carte.Image = ilSabotDeCartes.Images[i_image];
+
+                        if (i_image == indicePremierCarteCLique)
+                        {
+                            ImageTrouvee[i_carte1] = true;
+                            ImageTrouvee[i_carte2] = true;
+                            imageTrouveCompteur += 2;
+                        }
+
+                        if (imageTrouveCompteur == 8)
+                        {
+                            timer.Stop();
+                            stopwatch.Stop();
+                            MessageBox.Show("Bravo vous avez gagner en : " + chronoLabel.Text + "sec");
+
+                        }
+
+                        timerRetry = new System.Timers.Timer(2500);
+                        timerRetry.Elapsed += TimerElapsed;
+                        attente = true;
+
+                        timerRetry.Start();
                     }
                 }
-                
-             /*   if (nbCarteRetourne == 0)
-                {
-                    Image_1 = carte.Image;
-                }
-                if (nbCarteRetourne == 1)
-                {
-                    Image_2 = carte.Image;
-                }
-             */
-                nbCarteRetourne++;
-                if(nbCarteRetourne == 2)
-                {
-                    timer1.Start();
-                    tromper = true;
-                    nbCarteRetourne = 0;
-                    indicePremierCarteCLique = 0;
-                    pb_XX_Click(sender, e);
-                    Image_1 = null;
-                    Image_2 = null;
-
-                }
-
-                if(imageTrouveCompteur == 8)
-                {
-                    timer1.Stop();
-                    timer.Stop();
-                    stopwatch.Stop();
-
-                    MessageBox.Show("Bravo vous avez gagner en : " + chronoLabel.Text +"sec");
-                        
-                }                
             }
         }
 
@@ -225,7 +213,7 @@ namespace Memory
 
         private void jouer_Click(object sender, EventArgs e)
         {
-          
+            
             for (int i = 0; i < ImageTrouvee.Length; i++)
             {
                 ImageTrouvee[i] = false;
@@ -234,25 +222,15 @@ namespace Memory
             nbCartesDansSabot = ilSabotDeCartes.Images.Count - 1;
             nbCartesSurTapis = tlpTapisDeCartes.Controls.Count;
             retournerCarte();
-
-            /*  i_hasard = hasard.NumeroAleatoire();
-              PictureBox carte;
-              carte = pb_Recherche;
-
-
-              carte.Image = ilSabotDeCartes.Images[i_hasard];
-            */
-
-            //section timer
-
             timer.Start();
             stopwatch.Start();
-
+            nbCarteRetourne = 0;
 
         }
 
         private void retournerCarte()
         {
+           
             PictureBox carte;
             for (int i_carte = 0; i_carte < nbCartesSurTapis; i_carte++)
             {  
@@ -272,18 +250,16 @@ namespace Memory
             Application.DoEvents();
         }
 
-
-        private void timer1_Tick(object sender, EventArgs e)
+        private void TimerElapsed(Object sender, ElapsedEventArgs e) //CE TIMER NOUS SERT A METTRE FACE VERSO LES CARTE QUAND CELLE-CI SONT PAS IDENTIQUE
         {
-            if (tromper)
-            {
-                retournerCarte();
-                timer1.Stop();
-            }
-            Application.DoEvents();
+           //2,5 SEC APRES AVOIR RETOURNER 2 CARTE NON IDENTIQUE 
 
+            retournerCarte(); //ON LES RETOURNE
+            attente = false;
+            timerRetry.Stop();
+            nbCarteRetourne = 0;
+           
         }
-
 
 
         // MANAGEMENT OF PB CLICK
