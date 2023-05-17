@@ -31,7 +31,6 @@ namespace Memory
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(memory));
-            this.titre = new System.Windows.Forms.Label();
             this.btn_Distribuer = new System.Windows.Forms.Button();
             this.jouer = new System.Windows.Forms.Button();
             this.tlpTapisDeCartes = new System.Windows.Forms.TableLayoutPanel();
@@ -48,6 +47,7 @@ namespace Memory
             this.timerLabel = new System.Windows.Forms.Label();
             this.chronoLabel = new System.Windows.Forms.Label();
             this.titreChronoLabel = new System.Windows.Forms.Label();
+            this.menuGauche = new System.Windows.Forms.GroupBox();
             this.tlpTapisDeCartes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pb_08)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_07)).BeginInit();
@@ -57,35 +57,35 @@ namespace Memory
             ((System.ComponentModel.ISupportInitialize)(this.pb_01)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_05)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_03)).BeginInit();
+            this.menuGauche.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // titre
-            // 
-            this.titre.AutoSize = true;
-            this.titre.Location = new System.Drawing.Point(428, 21);
-            this.titre.Name = "titre";
-            this.titre.Size = new System.Drawing.Size(165, 17);
-            this.titre.TabIndex = 0;
-            this.titre.Text = "Le Grand jeu du Memory";
             // 
             // btn_Distribuer
             // 
-            this.btn_Distribuer.Location = new System.Drawing.Point(58, 458);
+            this.btn_Distribuer.BackColor = System.Drawing.Color.SeaShell;
+            this.btn_Distribuer.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_Distribuer.BackgroundImage")));
+            this.btn_Distribuer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_Distribuer.FlatAppearance.BorderColor = System.Drawing.Color.SeaShell;
+            this.btn_Distribuer.FlatAppearance.BorderSize = 0;
+            this.btn_Distribuer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Distribuer.Location = new System.Drawing.Point(6, 81);
             this.btn_Distribuer.Name = "btn_Distribuer";
-            this.btn_Distribuer.Size = new System.Drawing.Size(127, 56);
+            this.btn_Distribuer.Size = new System.Drawing.Size(249, 236);
             this.btn_Distribuer.TabIndex = 1;
-            this.btn_Distribuer.Text = "Distribuer les cartes";
-            this.btn_Distribuer.UseVisualStyleBackColor = true;
+            this.btn_Distribuer.UseVisualStyleBackColor = false;
             this.btn_Distribuer.Click += new System.EventHandler(this.btn_Distribuer_Click);
             // 
             // jouer
             // 
-            this.jouer.Location = new System.Drawing.Point(58, 174);
+            this.jouer.BackColor = System.Drawing.Color.SeaShell;
+            this.jouer.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("jouer.BackgroundImage")));
+            this.jouer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.jouer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.jouer.Location = new System.Drawing.Point(6, 452);
             this.jouer.Name = "jouer";
-            this.jouer.Size = new System.Drawing.Size(126, 56);
+            this.jouer.Size = new System.Drawing.Size(255, 76);
             this.jouer.TabIndex = 3;
-            this.jouer.Text = "Jouer";
-            this.jouer.UseVisualStyleBackColor = true;
+            this.jouer.UseVisualStyleBackColor = false;
             this.jouer.Click += new System.EventHandler(this.jouer_Click);
             // 
             // tlpTapisDeCartes
@@ -433,18 +433,28 @@ namespace Memory
             this.titreChronoLabel.TabIndex = 17;
             this.titreChronoLabel.Text = "Temps écoulé :";
             // 
+            // menuGauche
+            // 
+            this.menuGauche.BackColor = System.Drawing.Color.SeaShell;
+            this.menuGauche.Controls.Add(this.jouer);
+            this.menuGauche.Controls.Add(this.btn_Distribuer);
+            this.menuGauche.Location = new System.Drawing.Point(0, 0);
+            this.menuGauche.Name = "menuGauche";
+            this.menuGauche.Size = new System.Drawing.Size(267, 674);
+            this.menuGauche.TabIndex = 18;
+            this.menuGauche.TabStop = false;
+            // 
             // memory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1336, 675);
+            this.BackColor = System.Drawing.Color.DarkGray;
+            this.ClientSize = new System.Drawing.Size(1377, 695);
+            this.Controls.Add(this.menuGauche);
             this.Controls.Add(this.titreChronoLabel);
             this.Controls.Add(this.chronoLabel);
             this.Controls.Add(this.timerLabel);
             this.Controls.Add(this.tlpTapisDeCartes);
-            this.Controls.Add(this.jouer);
-            this.Controls.Add(this.btn_Distribuer);
-            this.Controls.Add(this.titre);
             this.Name = "memory";
             this.Text = "Memory";
             this.Load += new System.EventHandler(this.memory_Load);
@@ -457,14 +467,13 @@ namespace Memory
             ((System.ComponentModel.ISupportInitialize)(this.pb_01)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_05)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_03)).EndInit();
+            this.menuGauche.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label titre;
         private System.Windows.Forms.Button btn_Distribuer;
         private System.Windows.Forms.Button jouer;
         private System.Windows.Forms.TableLayoutPanel tlpTapisDeCartes;
@@ -481,6 +490,7 @@ namespace Memory
         private System.Windows.Forms.PictureBox pb_05;
         private System.Windows.Forms.Label chronoLabel;
         private System.Windows.Forms.Label titreChronoLabel;
+        private System.Windows.Forms.GroupBox menuGauche;
     }
 }
 

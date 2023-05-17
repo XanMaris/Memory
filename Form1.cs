@@ -47,7 +47,27 @@ namespace Memory
         public memory()
         {
             InitializeComponent();
-             
+            BackColor = Color.White;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+
+            // Modifier les propriétés de la police
+            Font = new Font("Arial", 12, FontStyle.Regular);
+
+            // Modifier le titre du formulaire
+            Text = "Memory";
+
+            // Modifier la taille et la position du formulaire
+            CenterToScreen();
+
+            // Ajouter un bouton avec une image personnalisée
+
+            jouer.BackColor = Color.Transparent;
+
+         
+   
+         
+
         }
 
         private void Distribution_Sequentielle() //PAS UTILISER DANS LA NOUVELLE VERSION (MAIS IMPLEMENTER COMME DEMANDER)
