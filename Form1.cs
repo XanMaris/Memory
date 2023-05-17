@@ -262,6 +262,7 @@ namespace Memory
             timer.Start();
             stopwatch.Start();
             nbCarteRetourne = 0;
+            imageTrouveCompteur = 0;
 
         }
 
@@ -285,8 +286,8 @@ namespace Memory
         {
             TimeSpan timespan = stopwatch.Elapsed;
             int minutes = (int)timespan.TotalMinutes;
-            int secondes = (int)timespan.TotalSeconds;
-            chronoLabel.Text = timespan.ToString();
+            int secondes = (int)timespan.Seconds;
+            chronoLabel.Text = minutes.ToString() + ":" + secondes.ToString();
             Application.DoEvents();
         }
 
