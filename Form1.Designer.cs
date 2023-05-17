@@ -47,6 +47,8 @@ namespace Memory
             this.btn_Test = new System.Windows.Forms.Button();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.timerLabel = new System.Windows.Forms.Label();
+            this.chronoLabel = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tlpTapisDeCartes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pb_08)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_07)).BeginInit();
@@ -413,6 +415,7 @@ namespace Memory
             // 
             // timer
             // 
+            this.timer.Enabled = true;
             this.timer.Interval = 1000;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
@@ -424,11 +427,26 @@ namespace Memory
             this.timerLabel.Size = new System.Drawing.Size(0, 17);
             this.timerLabel.TabIndex = 15;
             // 
+            // chronoLabel
+            // 
+            this.chronoLabel.AutoSize = true;
+            this.chronoLabel.Location = new System.Drawing.Point(716, 127);
+            this.chronoLabel.Name = "chronoLabel";
+            this.chronoLabel.Size = new System.Drawing.Size(0, 17);
+            this.chronoLabel.TabIndex = 16;
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 2500;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // memory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1020, 575);
+            this.Controls.Add(this.chronoLabel);
             this.Controls.Add(this.timerLabel);
             this.Controls.Add(this.btn_Test);
             this.Controls.Add(this.tlpTapisDeCartes);
@@ -469,6 +487,8 @@ namespace Memory
         private System.Windows.Forms.PictureBox pb_07;
         private System.Windows.Forms.PictureBox pb_06;
         private System.Windows.Forms.PictureBox pb_05;
+        private System.Windows.Forms.Label chronoLabel;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

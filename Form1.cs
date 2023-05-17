@@ -17,7 +17,10 @@ namespace Memory
 
     public partial class memory : Form
     {
-        Stopwatch watch = new Stopwatch();
+        
+        
+
+
         // Déclaration des variables globales du jeu
         int nbCartesDansSabot; // Nombre de cartes dans le sabot (en fait nombre
                                // d'images dans le réservoir)
@@ -30,18 +33,19 @@ namespace Memory
         int i_carte2;
         int i_carte1;
         int carteClique;
-
+        bool tromper = false;
         bool[] ImageTrouvee = { false, false,false,false,false,false,false,false};
         int indicePremierCarteCLique =0;
-
+        int imageTrouveCompteur =0;
         int[] tImagesCartes1Dim = new int[8];
 
         LotoMachine hasard;
 
+        System.Diagnostics.Stopwatch stopwatch = new System.Diagnostics.Stopwatch();
+
         public memory()
         {
             InitializeComponent();
-           
         }
 
         private void Distribution_Sequentielle()
@@ -127,6 +131,8 @@ namespace Memory
 
         private void btn_Test_Click(object sender, EventArgs e)
         {
+
+
             // On utilise la LotoMachine pour générer une série aléatoire
             // On fixe à 49 le nombre maxi que retourne la machine
             LotoMachine hasard = new LotoMachine(49);
@@ -147,7 +153,7 @@ namespace Memory
 
         private void pb_XX_Click(object sender, EventArgs e)
         {
-
+           
             PictureBox carte;
            
             int i_image;
@@ -174,6 +180,7 @@ namespace Memory
                     {
                         ImageTrouvee[i_carte1] = true;
                         ImageTrouvee[i_carte2] = true;
+                        imageTrouveCompteur+=2;
                     }
                 }
                 
@@ -187,18 +194,28 @@ namespace Memory
                 }
              */
                 nbCarteRetourne++;
-            }
-                
-             else
+                if(nbCarteRetourne == 2)
                 {
-                // MessageBox.Show("Deux cartes sont déjà retournées !");
-                retournerCarte();
-                nbCarteRetourne = 0;
-                indicePremierCarteCLique = 0;
-                pb_XX_Click(sender,e);
-                Image_1 = null;
-                Image_2 = null;
+                    timer1.Start();
+                    tromper = true;
+                    nbCarteRetourne = 0;
+                    indicePremierCarteCLique = 0;
+                    pb_XX_Click(sender, e);
+                    Image_1 = null;
+                    Image_2 = null;
+
                 }
+
+                if(imageTrouveCompteur == 8)
+                {
+                    timer1.Stop();
+                    timer.Stop();
+                    stopwatch.Stop();
+
+                    MessageBox.Show("Bravo vous avez gagner en : " + chronoLabel.Text +"sec");
+                        
+                }                
+            }
         }
 
         /*private void btn_Retourner_Click(object sender, EventArgs e)
@@ -208,26 +225,29 @@ namespace Memory
 
         private void jouer_Click(object sender, EventArgs e)
         {
+          
             for (int i = 0; i < ImageTrouvee.Length; i++)
             {
                 ImageTrouvee[i] = false;
+                
             }
             nbCartesDansSabot = ilSabotDeCartes.Images.Count - 1;
             nbCartesSurTapis = tlpTapisDeCartes.Controls.Count;
             retournerCarte();
-          
-          /*  i_hasard = hasard.NumeroAleatoire();
-            PictureBox carte;
-            carte = pb_Recherche;
+
+            /*  i_hasard = hasard.NumeroAleatoire();
+              PictureBox carte;
+              carte = pb_Recherche;
 
 
-            carte.Image = ilSabotDeCartes.Images[i_hasard];
-          */
+              carte.Image = ilSabotDeCartes.Images[i_hasard];
+            */
 
             //section timer
 
             timer.Start();
-            timer.Enabled = true;
+            stopwatch.Start();
+
 
         }
 
@@ -245,12 +265,24 @@ namespace Memory
             }
         }
 
+
         private void timer_Tick(object sender, EventArgs e)
         {
-
-            // timerLabel.Text = time.ToString();
+            chronoLabel.Text = stopwatch.Elapsed.Seconds.ToString();
+            Application.DoEvents();
         }
 
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (tromper)
+            {
+                retournerCarte();
+                timer1.Stop();
+            }
+            Application.DoEvents();
+
+        }
 
 
 
@@ -295,5 +327,7 @@ namespace Memory
         {
             pb_XX_Click(sender, e);
         }
+
+      
     }
 }
