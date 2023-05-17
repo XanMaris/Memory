@@ -305,6 +305,9 @@ namespace Memory
             pb_XX_Click(sender, e);
         }
 
-      
+        private void memory_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

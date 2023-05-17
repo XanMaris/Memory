@@ -40,23 +40,23 @@ namespace Memory
             this.pb_06 = new System.Windows.Forms.PictureBox();
             this.pb_04 = new System.Windows.Forms.PictureBox();
             this.pb_02 = new System.Windows.Forms.PictureBox();
-            this.pb_03 = new System.Windows.Forms.PictureBox();
             this.pb_01 = new System.Windows.Forms.PictureBox();
             this.pb_05 = new System.Windows.Forms.PictureBox();
+            this.pb_03 = new System.Windows.Forms.PictureBox();
             this.ilSabotDeCartes = new System.Windows.Forms.ImageList(this.components);
-            this.btn_Test = new System.Windows.Forms.Button();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.timerLabel = new System.Windows.Forms.Label();
             this.chronoLabel = new System.Windows.Forms.Label();
+            this.titreChronoLabel = new System.Windows.Forms.Label();
             this.tlpTapisDeCartes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pb_08)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_07)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_06)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_04)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_02)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pb_03)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_01)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_05)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_03)).BeginInit();
             this.SuspendLayout();
             // 
             // titre
@@ -70,7 +70,7 @@ namespace Memory
             // 
             // btn_Distribuer
             // 
-            this.btn_Distribuer.Location = new System.Drawing.Point(58, 450);
+            this.btn_Distribuer.Location = new System.Drawing.Point(58, 458);
             this.btn_Distribuer.Name = "btn_Distribuer";
             this.btn_Distribuer.Size = new System.Drawing.Size(127, 56);
             this.btn_Distribuer.TabIndex = 1;
@@ -80,7 +80,7 @@ namespace Memory
             // 
             // jouer
             // 
-            this.jouer.Location = new System.Drawing.Point(421, 450);
+            this.jouer.Location = new System.Drawing.Point(58, 174);
             this.jouer.Name = "jouer";
             this.jouer.Size = new System.Drawing.Size(126, 56);
             this.jouer.TabIndex = 3;
@@ -100,88 +100,88 @@ namespace Memory
             this.tlpTapisDeCartes.Controls.Add(this.pb_06, 0, 1);
             this.tlpTapisDeCartes.Controls.Add(this.pb_04, 3, 0);
             this.tlpTapisDeCartes.Controls.Add(this.pb_02, 1, 0);
-            this.tlpTapisDeCartes.Controls.Add(this.pb_03, 2, 0);
             this.tlpTapisDeCartes.Controls.Add(this.pb_01, 0, 0);
             this.tlpTapisDeCartes.Controls.Add(this.pb_05, 0, 1);
-            this.tlpTapisDeCartes.Location = new System.Drawing.Point(120, 146);
+            this.tlpTapisDeCartes.Controls.Add(this.pb_03, 2, 0);
+            this.tlpTapisDeCartes.Location = new System.Drawing.Point(270, 65);
             this.tlpTapisDeCartes.Name = "tlpTapisDeCartes";
             this.tlpTapisDeCartes.RowCount = 2;
             this.tlpTapisDeCartes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpTapisDeCartes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 92F));
-            this.tlpTapisDeCartes.Size = new System.Drawing.Size(440, 199);
+            this.tlpTapisDeCartes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 276F));
+            this.tlpTapisDeCartes.Size = new System.Drawing.Size(1035, 548);
             this.tlpTapisDeCartes.TabIndex = 13;
             // 
             // pb_08
             // 
-            this.pb_08.Location = new System.Drawing.Point(333, 110);
+            this.pb_08.Location = new System.Drawing.Point(261, 275);
             this.pb_08.Name = "pb_08";
-            this.pb_08.Size = new System.Drawing.Size(100, 86);
+            this.pb_08.Size = new System.Drawing.Size(252, 270);
             this.pb_08.TabIndex = 6;
             this.pb_08.TabStop = false;
             this.pb_08.Click += new System.EventHandler(this.pb_08_Click);
             // 
             // pb_07
             // 
-            this.pb_07.Location = new System.Drawing.Point(113, 110);
+            this.pb_07.Location = new System.Drawing.Point(777, 275);
             this.pb_07.Name = "pb_07";
-            this.pb_07.Size = new System.Drawing.Size(100, 86);
+            this.pb_07.Size = new System.Drawing.Size(255, 270);
             this.pb_07.TabIndex = 4;
             this.pb_07.TabStop = false;
             this.pb_07.Click += new System.EventHandler(this.pb_07_Click);
             // 
             // pb_06
             // 
-            this.pb_06.Location = new System.Drawing.Point(223, 110);
+            this.pb_06.Location = new System.Drawing.Point(519, 275);
             this.pb_06.Name = "pb_06";
-            this.pb_06.Size = new System.Drawing.Size(100, 86);
+            this.pb_06.Size = new System.Drawing.Size(252, 270);
             this.pb_06.TabIndex = 3;
             this.pb_06.TabStop = false;
             this.pb_06.Click += new System.EventHandler(this.pb_06_Click);
             // 
             // pb_04
             // 
-            this.pb_04.Location = new System.Drawing.Point(333, 3);
+            this.pb_04.Location = new System.Drawing.Point(777, 3);
             this.pb_04.Name = "pb_04";
-            this.pb_04.Size = new System.Drawing.Size(100, 100);
+            this.pb_04.Size = new System.Drawing.Size(255, 266);
             this.pb_04.TabIndex = 1;
             this.pb_04.TabStop = false;
             this.pb_04.Click += new System.EventHandler(this.pb_04_Click);
             // 
             // pb_02
             // 
-            this.pb_02.Location = new System.Drawing.Point(113, 3);
+            this.pb_02.Location = new System.Drawing.Point(261, 3);
             this.pb_02.Name = "pb_02";
-            this.pb_02.Size = new System.Drawing.Size(100, 100);
+            this.pb_02.Size = new System.Drawing.Size(252, 266);
             this.pb_02.TabIndex = 0;
             this.pb_02.TabStop = false;
             this.pb_02.Click += new System.EventHandler(this.pb_02_Click);
-            // 
-            // pb_03
-            // 
-            this.pb_03.Location = new System.Drawing.Point(223, 3);
-            this.pb_03.Name = "pb_03";
-            this.pb_03.Size = new System.Drawing.Size(100, 100);
-            this.pb_03.TabIndex = 0;
-            this.pb_03.TabStop = false;
-            this.pb_03.Click += new System.EventHandler(this.pb_03_Click);
             // 
             // pb_01
             // 
             this.pb_01.Location = new System.Drawing.Point(3, 3);
             this.pb_01.Name = "pb_01";
-            this.pb_01.Size = new System.Drawing.Size(100, 100);
+            this.pb_01.Size = new System.Drawing.Size(252, 266);
             this.pb_01.TabIndex = 0;
             this.pb_01.TabStop = false;
             this.pb_01.Click += new System.EventHandler(this.pb_01_Click);
             // 
             // pb_05
             // 
-            this.pb_05.Location = new System.Drawing.Point(3, 110);
+            this.pb_05.Location = new System.Drawing.Point(3, 275);
             this.pb_05.Name = "pb_05";
-            this.pb_05.Size = new System.Drawing.Size(100, 86);
+            this.pb_05.Size = new System.Drawing.Size(252, 270);
             this.pb_05.TabIndex = 5;
             this.pb_05.TabStop = false;
             this.pb_05.Click += new System.EventHandler(this.pb_05_Click);
+            // 
+            // pb_03
+            // 
+            this.pb_03.Location = new System.Drawing.Point(519, 3);
+            this.pb_03.Name = "pb_03";
+            this.pb_03.Size = new System.Drawing.Size(252, 266);
+            this.pb_03.TabIndex = 0;
+            this.pb_03.TabStop = false;
+            this.pb_03.Click += new System.EventHandler(this.pb_03_Click);
             // 
             // ilSabotDeCartes
             // 
@@ -402,16 +402,6 @@ namespace Memory
             this.ilSabotDeCartes.Images.SetKeyName(212, "Taureau.jpg");
             this.ilSabotDeCartes.Images.SetKeyName(213, "Vache.jpg");
             // 
-            // btn_Test
-            // 
-            this.btn_Test.Location = new System.Drawing.Point(645, 252);
-            this.btn_Test.Name = "btn_Test";
-            this.btn_Test.Size = new System.Drawing.Size(126, 56);
-            this.btn_Test.TabIndex = 14;
-            this.btn_Test.Text = "TEST LotoMachine";
-            this.btn_Test.UseVisualStyleBackColor = true;
-            this.btn_Test.Click += new System.EventHandler(this.btn_Test_Click);
-            // 
             // timer
             // 
             this.timer.Enabled = true;
@@ -429,34 +419,44 @@ namespace Memory
             // chronoLabel
             // 
             this.chronoLabel.AutoSize = true;
-            this.chronoLabel.Location = new System.Drawing.Point(716, 127);
+            this.chronoLabel.Location = new System.Drawing.Point(1045, 629);
             this.chronoLabel.Name = "chronoLabel";
             this.chronoLabel.Size = new System.Drawing.Size(0, 17);
             this.chronoLabel.TabIndex = 16;
+            // 
+            // titreChronoLabel
+            // 
+            this.titreChronoLabel.AutoSize = true;
+            this.titreChronoLabel.Location = new System.Drawing.Point(934, 629);
+            this.titreChronoLabel.Name = "titreChronoLabel";
+            this.titreChronoLabel.Size = new System.Drawing.Size(105, 17);
+            this.titreChronoLabel.TabIndex = 17;
+            this.titreChronoLabel.Text = "Temps écoulé :";
             // 
             // memory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1020, 575);
+            this.ClientSize = new System.Drawing.Size(1336, 675);
+            this.Controls.Add(this.titreChronoLabel);
             this.Controls.Add(this.chronoLabel);
             this.Controls.Add(this.timerLabel);
-            this.Controls.Add(this.btn_Test);
             this.Controls.Add(this.tlpTapisDeCartes);
             this.Controls.Add(this.jouer);
             this.Controls.Add(this.btn_Distribuer);
             this.Controls.Add(this.titre);
             this.Name = "memory";
             this.Text = "Memory";
+            this.Load += new System.EventHandler(this.memory_Load);
             this.tlpTapisDeCartes.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pb_08)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_07)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_06)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_04)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_02)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pb_03)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_01)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_05)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_03)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -473,7 +473,6 @@ namespace Memory
         private System.Windows.Forms.PictureBox pb_02;
         private System.Windows.Forms.PictureBox pb_03;
         private System.Windows.Forms.ImageList ilSabotDeCartes;
-        private System.Windows.Forms.Button btn_Test;
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.Label timerLabel;
         private System.Windows.Forms.PictureBox pb_08;
@@ -481,6 +480,7 @@ namespace Memory
         private System.Windows.Forms.PictureBox pb_06;
         private System.Windows.Forms.PictureBox pb_05;
         private System.Windows.Forms.Label chronoLabel;
+        private System.Windows.Forms.Label titreChronoLabel;
     }
 }
 
