@@ -29,6 +29,7 @@ namespace Memory
 
 
         int[] tImagesCartes;
+        bool reussi;
 
         bool attente = false; //SERT A BLOQUER LE CLICK SUR LES AUTRE IMAGE TANT QUE LES DEUX CARTE DIFFERENTES SONT FACE RECTO
         int i_carte2; //2 eme carte tiré
@@ -180,6 +181,7 @@ namespace Memory
         {
                 if (nbCarteRetourne < 2) //SECURITE (on peut ps avoir 2 carte retourner ---- 1 ere carte : 0 ----- 2 ème carte : 1 
                 {
+                    reussi = false;
                     carte = (PictureBox)sender; 
                     carteClique = Convert.ToInt32(carte.Tag); //recuperation de la carte courante
 
@@ -204,6 +206,7 @@ namespace Memory
                             ImageTrouvee[i_carte1] = true; //MAJ du tableau de boolean
                             ImageTrouvee[i_carte2] = true;
                             imageTrouveCompteur += 2; //Augmentation de 2 car pair 
+                            reussi = true;
                         }
 
                         if (imageTrouveCompteur == 8)
@@ -213,12 +216,25 @@ namespace Memory
                             MessageBox.Show("Bravo vous avez gagner en : " + chronoLabel.Text + "sec");
 
                         }
+                        if(!reussi)
+                        {
+                            timerRetry = new System.Timers.Timer(2500); //Creation d'un timer pour afficher les carte cliqué
+                            timerRetry.Elapsed += TimerElapsed;
+                            attente = true; //verrou
 
-                        timerRetry = new System.Timers.Timer(2500); //Creation d'un timer pour afficher les carte cliqué
-                        timerRetry.Elapsed += TimerElapsed; 
-                        attente = true; //verrou
+                            timerRetry.Start(); //lancement du timer
 
-                        timerRetry.Start(); //lancement du timer
+                        }
+                        else
+                        {
+                            retournerCarte();
+                            nbCarteRetourne = 0;
+                            attente = false;
+                        }
+
+
+
+                      
                     }
                 }
             }
@@ -267,7 +283,10 @@ namespace Memory
 
         private void timer_Tick(object sender, EventArgs e) //TIMER VISUEL POUR DETERMINER LA LONGUEUR DE LA PARTIE EN SECONDE
         {
-            chronoLabel.Text = stopwatch.Elapsed.Seconds.ToString();
+            TimeSpan timespan = stopwatch.Elapsed;
+            int minutes = (int)timespan.TotalMinutes;
+            int secondes = (int)timespan.TotalSeconds;
+            chronoLabel.Text = timespan.ToString();
             Application.DoEvents();
         }
 
