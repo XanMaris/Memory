@@ -48,6 +48,7 @@ namespace Memory
             this.chronoLabel = new System.Windows.Forms.Label();
             this.titreChronoLabel = new System.Windows.Forms.Label();
             this.menuGauche = new System.Windows.Forms.GroupBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tlpTapisDeCartes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pb_08)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_07)).BeginInit();
@@ -58,6 +59,7 @@ namespace Memory
             ((System.ComponentModel.ISupportInitialize)(this.pb_05)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_03)).BeginInit();
             this.menuGauche.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_Distribuer
@@ -80,10 +82,11 @@ namespace Memory
             this.jouer.BackColor = System.Drawing.Color.SeaShell;
             this.jouer.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("jouer.BackgroundImage")));
             this.jouer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.jouer.FlatAppearance.BorderSize = 0;
             this.jouer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.jouer.Location = new System.Drawing.Point(6, 452);
+            this.jouer.Location = new System.Drawing.Point(6, 451);
             this.jouer.Name = "jouer";
-            this.jouer.Size = new System.Drawing.Size(255, 76);
+            this.jouer.Size = new System.Drawing.Size(249, 77);
             this.jouer.TabIndex = 3;
             this.jouer.UseVisualStyleBackColor = false;
             this.jouer.Click += new System.EventHandler(this.jouer_Click);
@@ -419,7 +422,7 @@ namespace Memory
             // chronoLabel
             // 
             this.chronoLabel.AutoSize = true;
-            this.chronoLabel.Location = new System.Drawing.Point(1045, 629);
+            this.chronoLabel.Location = new System.Drawing.Point(1235, 667);
             this.chronoLabel.Name = "chronoLabel";
             this.chronoLabel.Size = new System.Drawing.Size(0, 17);
             this.chronoLabel.TabIndex = 16;
@@ -427,7 +430,7 @@ namespace Memory
             // titreChronoLabel
             // 
             this.titreChronoLabel.AutoSize = true;
-            this.titreChronoLabel.Location = new System.Drawing.Point(934, 629);
+            this.titreChronoLabel.Location = new System.Drawing.Point(1124, 667);
             this.titreChronoLabel.Name = "titreChronoLabel";
             this.titreChronoLabel.Size = new System.Drawing.Size(105, 17);
             this.titreChronoLabel.TabIndex = 17;
@@ -444,12 +447,23 @@ namespace Memory
             this.menuGauche.TabIndex = 18;
             this.menuGauche.TabStop = false;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Location = new System.Drawing.Point(1067, 648);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(51, 55);
+            this.pictureBox1.TabIndex = 19;
+            this.pictureBox1.TabStop = false;
+            // 
             // memory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkGray;
-            this.ClientSize = new System.Drawing.Size(1377, 695);
+            this.ClientSize = new System.Drawing.Size(1377, 718);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.menuGauche);
             this.Controls.Add(this.titreChronoLabel);
             this.Controls.Add(this.chronoLabel);
@@ -468,6 +482,7 @@ namespace Memory
             ((System.ComponentModel.ISupportInitialize)(this.pb_05)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_03)).EndInit();
             this.menuGauche.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -491,6 +506,7 @@ namespace Memory
         private System.Windows.Forms.Label chronoLabel;
         private System.Windows.Forms.Label titreChronoLabel;
         private System.Windows.Forms.GroupBox menuGauche;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 
