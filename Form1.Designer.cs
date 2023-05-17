@@ -443,7 +443,7 @@ namespace Memory
             this.menuGauche.Controls.Add(this.btn_Distribuer);
             this.menuGauche.Location = new System.Drawing.Point(0, 0);
             this.menuGauche.Name = "menuGauche";
-            this.menuGauche.Size = new System.Drawing.Size(267, 674);
+            this.menuGauche.Size = new System.Drawing.Size(267, 734);
             this.menuGauche.TabIndex = 18;
             this.menuGauche.TabStop = false;
             // 
