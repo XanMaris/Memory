@@ -27,7 +27,8 @@ namespace Memory
 
         System.Timers.Timer timerRetry;
 
-
+        int secondes;
+        int minutes;
         int[] tImagesCartes;
         bool reussi;
 
@@ -92,6 +93,8 @@ namespace Memory
             nbCartesDansSabot = ilSabotDeCartes.Images.Count - 1;
             nbCartesSurTapis = tlpTapisDeCartes.Controls.Count;
             Distribution_Aleatoire();
+            stopwatch.Restart();
+            stopwatch.Stop();
         }
 
         private void Distribution_Aleatoire() //GENERE 4 NOMBRE ALEAOITRE QUI SERONT LES INDICE DES IMAGE POUR LES CARTE
@@ -213,7 +216,7 @@ namespace Memory
                         {
                             timer.Stop();
                             stopwatch.Stop();
-                            MessageBox.Show("Bravo vous avez gagné en : " + chronoLabel.Text + "minutes");
+                            MessageBox.Show("Bravo vous avez gagné en : " + minutes +" minutes et "+secondes + " secondes");
 
                         }
                         if(!reussi)
@@ -260,7 +263,7 @@ namespace Memory
             //INITIALISATION DES SERVICES
             retournerCarte();
             timer.Start();
-            stopwatch.Start();
+            stopwatch.Restart();
             nbCarteRetourne = 0;
             imageTrouveCompteur = 0;
 
@@ -285,9 +288,9 @@ namespace Memory
         private void timer_Tick(object sender, EventArgs e) //TIMER VISUEL POUR DETERMINER LA LONGUEUR DE LA PARTIE EN SECONDE
         {
             TimeSpan timespan = stopwatch.Elapsed;
-            int minutes = (int)timespan.TotalMinutes;
-            int secondes = (int)timespan.Seconds;
-            chronoLabel.Text = minutes.ToString() + ":" + secondes.ToString();
+            minutes = (int)timespan.TotalMinutes;
+            secondes = (int)timespan.Seconds;
+            chronoLabel.Text = minutes.ToString().PadLeft(2, '0') + ":" + secondes.ToString().PadLeft(2,'0');
             Application.DoEvents();
         }
 
