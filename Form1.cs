@@ -213,7 +213,7 @@ namespace Memory
                         {
                             timer.Stop();
                             stopwatch.Stop();
-                            MessageBox.Show("Bravo vous avez gagner en : " + chronoLabel.Text + "sec");
+                            MessageBox.Show("Bravo vous avez gagné en : " + chronoLabel.Text + "minutes");
 
                         }
                         if(!reussi)
